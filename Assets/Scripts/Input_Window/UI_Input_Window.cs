@@ -16,7 +16,7 @@ public class UI_Input_Window : MonoBehaviour
 
     private static UI_Input_Window instance;
 
-    
+    #region Runtime Events
     private void Awake()
     {
         instance = this;
@@ -39,8 +39,10 @@ public class UI_Input_Window : MonoBehaviour
         
         HideInputWindow();
     }
+    #endregion
 
 
+    #region Private Methods
     private void ShowInputWindow(string inputString, Action onCancel, Action<string> onOk)
     {
         gameObject.SetActive(true);
@@ -54,10 +56,8 @@ public class UI_Input_Window : MonoBehaviour
         okBtn.ClickFunc = () =>
         {
             onOk(inputText.text);
-            LogHistory();
             Debug.Log(inputText.text);
-
-
+            inputText.text = null;
         };
 
 
@@ -65,11 +65,12 @@ public class UI_Input_Window : MonoBehaviour
     private void HideInputWindow()
     {
         gameObject.SetActive(false);
-
-
     }
 
+    #endregion
 
+
+    #region Static Methods - Singletons
     public static void Static_ShowInputWindow(string inputString, Action onCancel, Action<string> onOk)
     {
         instance.ShowInputWindow(inputString, onCancel, onOk);
@@ -80,10 +81,5 @@ public class UI_Input_Window : MonoBehaviour
     {
         instance.HideInputWindow();
     }
-
-    public void LogHistory()
-    {
-        inputText.text = null;
-    }
-
+    #endregion
 }

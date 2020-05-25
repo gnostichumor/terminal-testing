@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using CodeMonkey.Utils;
 
-
+//Input Manager contains 
 
 public class Input_Manager : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class Input_Manager : MonoBehaviour
     private List<string> input_Logs = new List<string>();
 
     private bool windowBool = true;
+
+    #region RunTimeEvents
     private void Awake()
     {
        if (commandInputWindow == null)
@@ -24,9 +27,6 @@ public class Input_Manager : MonoBehaviour
         {
             inputField = transform.GetComponentInChildren<TMP_InputField>();
         }
-
-        
-
     }
 
     private void Start()
@@ -37,13 +37,14 @@ public class Input_Manager : MonoBehaviour
     void Update()
     {
         OpenCommandWindow();
-        //PrintCommandItems();
-        //PrintCommandList();
+        PrintCommandItems();
+        PrintCommandList();
 
     }
 
+    #endregion
 
-
+    #region Private Methods
     private void OpenCommandWindow()
     {
         if (Input.GetButtonDown("Input"))
@@ -66,6 +67,9 @@ public class Input_Manager : MonoBehaviour
 
         }
     }
+    #endregion
+
+    #region Public Methods
     public void PrintCommandItems()
     {
         string temp = "";
@@ -85,4 +89,6 @@ public class Input_Manager : MonoBehaviour
     {
         return input_Logs;
     }
+
+    #endregion
 }
